@@ -1,0 +1,41 @@
+.restaurant-menu-container {
+  display: flex;
+  flex-direction: column;
+}
+.restaurant-menu-header {
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #02060c99;
+  letter-spacing: 3px;
+  margin: 1px 0 10px 0;
+}
+.restaurant-menu-header #left {
+  transform: rotate(135deg);
+}
+.restaurant-menu-header #right {
+  transform: rotate(-45deg);
+}
+.restaurant-menu-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #02060c0d;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.restaurant-menu-search-container .restaurant-menu-search {
+  width: 58%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #02060c99;
+}
+.restaurant-menu-filter-container{
+    border-bottom: 1px solid #02060c24;
+    margin-top: 2px;
+}

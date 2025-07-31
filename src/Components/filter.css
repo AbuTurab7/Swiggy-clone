@@ -1,0 +1,189 @@
+.filter-main-container {
+    margin-top: 10px;
+  margin-bottom: 10px;
+  /* border: 2px solid red; */
+}
+.filter-inside-container {
+  /* border: 2px solid red; */
+  padding: 10px;
+  display: flex;
+  /* justify-content: space-between; */
+  width: 90%;
+  gap: 10px;
+}
+.filter-Inside-container {
+  /* border: 2px solid red; */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+}
+.filter-container {
+  border: 1px solid rgba(158, 156, 156, 0.452);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px 8px 10px;
+  box-shadow: 0 0 2px rgba(156, 156, 156, 0.386);
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+}
+.filter-container p {
+  font-size: 14px;
+  color: #02060cbf;
+}
+.Active{
+  background-color: rgba(216, 216, 216, 0.455);
+  border: 1px solid black;
+}
+.crossIcon{
+  display: none;
+}
+.Active .crossIcon{
+  display: block;
+}
+/* filter-modal-css */
+/* border-bottom: 1px solid rgba(2, 6, 12, 0.05); */
+.filter-modal .modal-content {
+  max-height: 450px;
+}
+.filter-modal .modal-body {
+  /* border: 2px solid rgb(132, 0, 255); */
+  border-top: 1px solid rgba(173, 173, 173, 0);
+  /* padding: 0; */
+  padding: 0px 15px 0px 20px;
+  overflow-x: hidden;
+}
+.modal-body-container {
+  /* border: 5px solid rgb(5, 4, 4); */
+  display: flex;
+  position: relative;
+}
+.modal-click-marker {
+  position: absolute;
+  left: -2px;
+  top: 0px;
+  height: 55px;
+  width: 10px;
+  background-color: orangered;
+  border-radius: 5px;
+  /* transform: translateY(0%); */
+}
+.filter-modal-buttons-container {
+  /* border: 2px solid red; */
+  /* border-top: 1px solid rgba(2, 6, 12, 0.219); */
+  border-right: 1px solid rgba(173, 173, 173, 0.312);
+  width: 30%;
+  /* margin-left: 5%; */
+}
+.filter-modal-button {
+  /* border: 2px solid rgb(187, 255, 0); */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  cursor: pointer;
+}
+.filter-modal-button {
+  /* border: 2px solid rgb(187, 255, 0); */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+.filter-modal-button p {
+  font-size: 18px;
+  color: #02060cbf;
+}
+.filter-modal-data-container {
+  /* border: 2px solid rgb(0, 255, 47); */
+  width: 70%;
+  padding: 10px 30px;
+  /* border: 2px solid red; */
+  max-height: 378px;
+  overflow: scroll;
+}
+.filter-modal-sort-data {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.filter-modal-item-list {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+/* .filter-modal .modal-footer{
+    border: 2px solid red;
+    height: 55px;
+    position: relative;
+} */
+.modal-filter-btn {
+  /* border: 2px solid red; */
+  box-shadow: 0 0 10px rgba(156, 156, 156, 0.562);
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  gap: 60px;
+  height: 55px;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  bottom: 0%;
+  right: 0;
+  align-items: center;
+}
+#clear-filter-btn {
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  color: #ff5200;
+}
+#apply-filter-btn {
+  background-color: #ff5200;
+  border: none;
+  font-size: 18px;
+  color: white;
+  border-radius: 10px;
+  padding: 8px 70px;
+  margin-right: 20px;
+}
+.hide {
+  display: none;
+}
+
+/* RestFilter.css */
+.RestFilter-container{
+    width: 60px;
+}
+.filter-container-slider {
+  /* position: relative; */
+  background-color: gray;
+  height: 10px;
+  width: 34px;
+  border-radius: 10px;
+  margin: 0 5px 0 5px;
+}
+/* .filter-container img {
+  position: absolute;
+  border-radius: 8px;
+  left: 13px;
+  left: 45%;
+  transition: 0.6s ease;
+} */
+.filter-container img {
+  position: absolute;
+  border-radius: 8px;
+  transition: 0.4s ease;
+}
+
+.filter-container img.off {
+  left: 13px;
+}
+
+.filter-container img.On {
+  left: 31px;
+}
+

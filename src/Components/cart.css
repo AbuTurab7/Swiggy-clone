@@ -1,0 +1,129 @@
+.cart-main-container {
+  width: 40%;
+  margin: auto;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: 0 0 15px rgba(2, 6, 12, .2);
+}
+.cart-rest-details-container{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.cart-rest-detail{
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+}
+.cart-item-container {
+  padding: 10px;
+  border-bottom: dotted 2px rgba(2, 6, 12, 0.2);
+}
+.cart-details-container {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-item-name,
+.cart-item-btn-container {
+  /* border: 2px solid green; */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#cart-item-btn {
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  color: #ff5200;
+}
+.cart-clear-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 5px 0 0;
+}
+.cart-bill-container {
+  padding: 0 10px 10px 10px ;
+}
+.item-total,
+.delivery-fee,
+.gst-charges,
+.to-pay {
+  display: flex;
+  justify-content: space-between;
+  color: #02060C;
+  font-size: 10px;
+}
+.item-total p,
+.delivery-fee p,
+.gst-charges p,
+.to-pay p {
+  font-size: 14px;
+}
+.delivery-fee {
+  padding: 10px 0 10px 0;
+  color: #02060CB3;
+  border-bottom: solid 1px rgba(2, 6, 12, 0.2);
+}
+.gst-charges {
+  padding: 10px 0 10px 0;
+  color: #02060CB3;
+  border-bottom: solid 1px black;
+}
+.to-pay{
+    padding-top: 10px;
+}
+
+.empty-cart-main-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 40%;
+  margin: auto;
+  padding: 20px;
+  margin-top: 30px;
+  /* box-shadow: 0 0 15px rgba(2, 6, 12, .2); */
+}
+.cart-image-container{
+  width: 271px;
+  height: 256px;
+  background-image: url(https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0);
+  object-fit: cover;
+  background-repeat: no-repeat;
+    background-size: cover;
+}
+.see-restaurant-near-me{
+  text-decoration: none !important;
+      margin-top: 20px;
+    padding: 11px 20px;
+    background-color: #ff5200;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    font-size: 15px;
+    text-align: center;
+}
+.orderBtnContainer{
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+}
+.orderBtnContainer button{
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+}
+
+#orderBtn{
+  color: white;
+  background-color: #1BA672;
+  
+}
+#Sign-in-Btn{
+  color: orangered;
+  border: 2px solid orangered;
+  
+}

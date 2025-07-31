@@ -1,0 +1,112 @@
+.navbar {
+  /* background-color: rgb(94, 220, 220); */
+  height: 80px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  /* border: 2px solid red; */
+}
+.logo-drop-container {
+  /* border: 2px solid red; */
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  width: 35%;
+}
+.logo-container{
+  color: white;
+  height: 48px;
+  width: 48px;
+  border-radius: 13px;
+  background-color: orangered;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.1s ease-in;
+}
+.logo-container:hover{
+  scale: 1.1;
+
+}
+.logo-container svg{
+  color: white;
+  font-size: 32px;
+}
+#dropdown-split-basic {
+  margin-left: 40px;
+}
+
+#arrow {
+  font-size: 35px;
+  color: orangered;
+}
+.navbar-address-container{
+  display: flex;
+  /* border: 2px solid red; */
+  align-items: center;
+  gap :5px;
+}
+#navbar-address{
+  font-size: 13px;
+  color: #02060CB3;
+}
+#dropdown-split-basic::after {
+  display: none;
+}
+#navbar-other:hover{
+  color: orangered;
+}
+
+.navLink-container {
+  /* border: 2px solid red; */
+  /* background-color: blue; */
+  width: 100%;
+  /* width: 900px; */
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  /* padding: 10px 20px; */
+}
+
+.navLink-container .nav-link {
+  display: flex;
+  /* border: 2px solid red; */
+  align-items: center;
+  margin: 0 10px;
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.navLink-container .nav-link svg{
+  font-size: 22px;
+}
+.corporate-container,
+.offer-container,
+.search-container,
+.help-container,
+.sign-in-container,
+.cart-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.corporate-container:hover,
+.offer-container:hover,
+.search-container:hover,
+.help-container:hover,
+.sign-in-container:hover,
+.cart-container:hover{
+  color: orangered;
+}
+p {
+  margin: 0;
+  font-size: 15px;
+}
+#logOutBtn{
+  border: none;
+  background-color: transparent;
+}
+
+

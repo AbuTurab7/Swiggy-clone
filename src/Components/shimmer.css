@@ -1,0 +1,122 @@
+.shimmer-main-container{
+    /* border: 2px solid rgb(32, 17, 17); */
+    height: 100vh;
+}
+.upper-shimmer{
+    position: relative;
+    height: 40%;
+    color: rgb(217, 214, 214);
+    background-color: rgb(32, 45, 56);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.spinner {
+    position: absolute;
+    top: 26%;
+    left: 47.3%;
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   background: conic-gradient(#0000 10%,#b6b6b8);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   animation: spinner-zp9dbg 1s infinite linear;
+   padding: 40px;
+}
+
+@keyframes spinner-zp9dbg {
+   to {
+      transform: rotate(1turn);
+   }
+}
+.lower-shimmer-container{
+    /* border: 2px solid red; */
+    margin-top: 70px;
+}
+.lower-shimmer{
+    /* border: 2px solid rgb(0, 255, 8); */
+    margin: auto;
+    width: 77%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+.shimmer-card{
+    height: 270px;
+    width: 23%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.shimmer-img{
+    height: 150px;
+    background-color: gray;
+}
+.shimmer-title{
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 10px;
+    width: 30%;
+    background-color: gray;
+}
+.shimmer-detail{
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 10px;
+    width: 70%;
+    background-color: gray;
+}
+/* Shimmer animation keyframes */
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+/* Apply shimmer animation */
+.shimmer-img,
+.rest-shimmer-img,
+.shimmer-title,
+.shimmer-detail {
+  background: linear-gradient(
+    to right,
+    #eeeeee 8%,
+    #dddddd 18%,
+    #eeeeee 33%
+  );
+  background-size: 800px 104px;
+  animation: shimmerEffect 1.2s infinite linear;
+  border-radius: 5px;
+}
+.rest-shimmer{
+    /* border: 2px solid rgb(0, 255, 8); */
+    margin: auto;
+    width: 52%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+}
+.rest-shimmer-card{
+  margin-top: 60px;
+    height: 270px;
+    width: 60%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.rest-shimmer-img{
+    height: 250px;
+    background-color: gray;
+}

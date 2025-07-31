@@ -1,0 +1,139 @@
+.restaurant-main-container {
+  width: 52%;
+  /* border: 2px solid black; */
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
+}
+/* .restuarant-header{
+    border: 2px solid blue;
+    margin-bottom: 18.76px;
+} */
+.restuarant-header #home {
+  color: #02060c80;
+  font-size: 10px;
+  text-decoration: none;
+}
+.restuarant-header #home:hover {
+  color: #02060ccc;
+}
+.restuarant-header #home {
+  color: #02060c80;
+  font-size: 10px;
+  text-decoration: none;
+}
+/* .restuarant-card-container {
+  border: 2px solid rgb(224, 28, 11);
+} */
+.restuarant-card-container #name {
+  font-size: 28px;
+  color: #02060ceb;
+  margin: 18.76px 0 18.76px 15px;
+  font-weight: 700;
+}
+.restuarant-card {
+  /* border: 2px solid rgb(11, 224, 25); */
+  border-radius: 20px;
+  padding: 15px;
+  background: linear-gradient(
+    rgb(255, 255, 255) -6.71%,
+    rgb(235, 235, 242) 56.19%,
+    rgb(223, 223, 231) 106.56%
+  );
+}
+.restaurant-card-inside {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2px;
+  border: 1px solid rgba(2, 6, 12, 0.15);
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 8px 16px 0px;
+  padding: 20px;
+  font-size: 14px;
+}
+.restaurant-card-inside p {
+  font-size: 13px;
+  color: #02060ceb;
+}
+#restaurant-card-rating {
+  color: #02060ceb;
+  font-size: 15px;
+  font-weight: bold;
+}
+#restaurant-card-rating svg {
+  margin-bottom: 5px;
+  color: green;
+  font-size: 20px;
+}
+.restaurant-card-route-container {
+  /* border: 2px solid brown; */
+  display: flex;
+}
+.route-container {
+  /* border: 2px solid rgb(24, 80, 21); */
+  width: 30px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.route-circle {
+  background-color: #c4c4c4;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+}
+.route-line {
+  background-color: #c4c4c4;
+  height: 23px;
+  width: 3px;
+}
+.route-details {
+  padding: 1px 0 1px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#route-details-locality {
+  color: #02060c80;
+  margin-left: 5px;
+}
+.deal-card {
+  border-radius: 20px;
+  border: 1px solid rgba(2, 6, 12, 0.15);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+.deal-card-details-container{
+  display: flex;
+  flex-direction: column;
+  width: 245px;
+  margin-left: 15px;
+}
+.restaurant-footer{
+  background-color: #F1F1F6;
+  padding: 15px;
+  padding-top: 0;
+  height: 400px;
+}
+.footer-details-container{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+ .footer-logo{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+ }
+ .footer-Download-details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+ }
+ 
