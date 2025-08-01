@@ -9,7 +9,6 @@ const filterSlice = createSlice({
     reducers : {
         setFilterValue : (state,action) => {
             state.filterVal = action.payload
-            console.log(state.filterVal);
         }
     },
 })

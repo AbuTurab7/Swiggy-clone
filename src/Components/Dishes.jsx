@@ -35,7 +35,7 @@ export default function Dishes({ images }) {
           className="dishes-img-container"
           style={{ transform: `translateX(${value}%)` }}
         >
-          {images.map((img, index) => (
+          {images?.map((img, index) => (
             <img
               key={index}
               width={"150px"}
