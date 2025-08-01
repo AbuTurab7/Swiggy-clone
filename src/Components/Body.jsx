@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import RestaurantFooter from "./RestaurantFooter";
 import RestaurantSlide from "./RestaurantSlide";
 import RestaurantsList from "./RestaurantsList";
-import RestaurantBoxes from "./restaurantBoxes";
+import RestaurantBoxes from "./RestaurantBoxes";
 import { Coordinates } from "./ContextApi";
 import Shimmer from "./Shimmer";
 import Dishes from "./Dishes";
