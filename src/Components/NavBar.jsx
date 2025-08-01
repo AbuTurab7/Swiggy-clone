@@ -7,7 +7,7 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import LocationOffcanvas from "./Locationoffcanvas";
+import LocationOffcanvas from "./LocationOffcanvas";
 import { Outlet, useNavigate } from "react-router";
 import Container from "react-bootstrap/Container";
 import Popover from "react-bootstrap/Popover";
