@@ -4,6 +4,7 @@ import RestaurantSlide from "./RestaurantSlide";
 import RestaurantsList from "./RestaurantsList";
 import RestaurantBoxes from "./RestaurantBoxes";
 import { Coordinates } from "./ContextApi";
+import apiData from './api.json';
 import Shimmer from "./Shimmer";
 import Dishes from "./Dishes";
 import "./Home.css";
@@ -19,25 +20,17 @@ export default function Body() {
     coords: { lat, lng },
   } = useContext(Coordinates);
 
-  async function fetchData() {
-    try {
-      const res = await fetch("http://localhost:3000/data");
-      const result = await res.json();
-
-      setImages(result?.cards[0]?.card?.card?.imageGridCards?.info);
-      setData(result?.cards[1]?.card?.card);
-      setRestaurants(result?.cards);
-      setPlacesData(result?.cards[6]?.card?.card);
-      setCuisinesData(result?.cards[7]?.card?.card);
-      setRestaurantsNearData(result?.cards[8]?.card?.card);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
   useEffect(() => {
-    fetchData();
-  }, [lat, lng]);
+    console.log(apiData);
+    
+  setImages(apiData?.data?.cards[0]?.card?.card?.imageGridCards?.info);
+  setData(apiData?.data?.cards[1]?.card?.card);
+  setRestaurants(apiData?.data?.cards);
+  setPlacesData(apiData?.data?.cards[6]?.card?.card);
+  setCuisinesData(apiData?.data?.cards[7]?.card?.card);
+  setRestaurantsNearData(apiData?.data?.cards[8]?.card?.card);
+}, [lat, lng]);
+
 
   return (
     <>
