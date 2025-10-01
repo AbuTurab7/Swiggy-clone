@@ -32,11 +32,9 @@
    }
 }
 .lower-shimmer-container{
-    /* border: 2px solid red; */
     margin-top: 70px;
 }
 .lower-shimmer{
-    /* border: 2px solid rgb(0, 255, 8); */
     margin: auto;
     width: 77%;
     display: flex;
@@ -97,7 +95,6 @@
   border-radius: 5px;
 }
 .rest-shimmer{
-    /* border: 2px solid rgb(0, 255, 8); */
     margin: auto;
     width: 52%;
     display: flex;

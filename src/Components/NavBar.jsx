@@ -1,4 +1,8 @@
-import { IoBagOutline, IoHelpBuoyOutline, IoPersonOutline } from "react-icons/io5";
+import {
+  IoBagOutline,
+  IoHelpBuoyOutline,
+  IoPersonOutline,
+} from "react-icons/io5";
 import { addUser, removeUser } from "../Utilities/authSlice";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { auth, provider } from "../config/firebaseAuth";
@@ -13,10 +17,13 @@ import Container from "react-bootstrap/Container";
 import Popover from "react-bootstrap/Popover";
 import { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import { SiSwiggy } from "react-icons/si";
 import { CiSearch } from "react-icons/ci";
-import Nav from "react-bootstrap/Nav";
+import { GiHamburgerMenu } from "react-icons/gi";
 import toast from "react-hot-toast";
+
 import "./offCanvas.css";
 import "./navbar.css";
 
@@ -25,12 +32,19 @@ export default function NavBar() {
   const userData = useSelector((state) => state.authSlice.userData);
 
   const [address, setAddress] = useState("Chhindwara, Madhya Pradesh 4800");
-  const [show, setShow] = useState(false);
-  const [user, setUser] = useState("");
 
+  /* ✅ State for LocationOffcanvas */
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleAddress = (data) => setAddress(data);
+
+  /* ✅ State for Hamburger Offcanvas */
+  const [showMenu, setShowMenu] = useState(false);
+  const handleMenuClose = () => setShowMenu(false);
+  const handleMenuShow = () => setShowMenu(true);
+
+  const [user, setUser] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,6 +64,7 @@ export default function NavBar() {
       alert("Login failed: " + error.message);
     }
   }
+
   async function handleLogOut() {
     try {
       await signOut(auth);
@@ -71,16 +86,19 @@ export default function NavBar() {
       </Popover.Body>
     </Popover>
   );
+
   return (
     <>
-      <Navbar expand="lg" className="navbar ">
+      <Navbar expand="lg" className="navbar">
         <Container className="navbarContainer">
+          {/* Left side: Logo + Address */}
           <div className="logo-drop-container">
             <Navbar.Brand href="/">
               <div className="logo-container">
                 <SiSwiggy />
               </div>
             </Navbar.Brand>
+
             <NavDropdown
               onClick={handleShow}
               title={
@@ -103,12 +121,18 @@ export default function NavBar() {
               handleAddress={handleAddress}
             />
           </div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          {/* ---- MOBILE HAMBURGER ---- */}
+          <div className="hamburger-container d-lg-none">
+            <GiHamburgerMenu onClick={handleMenuShow} />
+          </div>
+
+          {/* Desktop Navbar Links */}
           <Navbar.Collapse id="basic-navbar-nav">
             <div className="navLink-container">
               <Nav className="me-auto">
                 <Nav.Link href="*">
-                  <div className="corporate-container ">
+                  <div className="corporate-container">
                     <IoBagOutline />
                     <p>Swiggy Corporate</p>
                   </div>
@@ -154,7 +178,6 @@ export default function NavBar() {
                 )}
                 <Nav.Link href="/restaurant/cart">
                   <div className="cart-container">
-                    {/* <CiShoppingBasket /> */}
                     <p>[{cart.length}] Cart</p>
                   </div>
                 </Nav.Link>
@@ -163,6 +186,46 @@ export default function NavBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* ---- OFFCANVAS (Hamburger Menu for Mobile) ---- */}
+      <Offcanvas show={showMenu} onHide={handleMenuClose} placement="start">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="flex-column">
+            <Nav.Link href="*">
+              <IoBagOutline /> Swiggy Corporate
+            </Nav.Link>
+            <Nav.Link href="*">
+              <CiSearch /> Search
+            </Nav.Link>
+            <Nav.Link href="*">
+              <TbCircleDashedPercentage /> Offers
+            </Nav.Link>
+            <Nav.Link href="*">
+              <IoHelpBuoyOutline /> Help
+            </Nav.Link>
+
+            {/* ✅ Sign In / User */}
+            {user ? (
+              <Nav.Link onClick={handleLogOut}>
+                <IoPersonOutline /> {user} (Logout)
+              </Nav.Link>
+            ) : (
+              <Nav.Link onClick={handleAuth}>
+                <IoPersonOutline /> Sign In
+              </Nav.Link>
+            )}
+
+            {/* ✅ Cart */}
+            <Nav.Link href="/restaurant/cart">
+              <IoBagOutline /> Cart [{cart.length}]
+            </Nav.Link>
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+
       <Outlet />
     </>
   );

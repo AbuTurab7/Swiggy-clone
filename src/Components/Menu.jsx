@@ -8,8 +8,6 @@ export default function Menu({ menu , restInfo }) {
   console.log(filteredMenu);
   console.log(menu);
 
-
-
   return (
     <>
       <div className="restaurant-menu-container">

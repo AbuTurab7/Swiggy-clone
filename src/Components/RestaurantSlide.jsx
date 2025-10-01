@@ -1,21 +1,34 @@
-import { IoIosArrowRoundBack } from "react-icons/io";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { useState } from "react";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+import { useState, useEffect } from "react";
 import Cards from "./Cards";
 import "./dishes.css";
 
-export default function RestaurantSlide({ data , restaurants }) {
-
+export default function RestaurantSlide({ data, restaurants }) {
   const [value, setValue] = useState(0); 
+  const [show, setShow] = useState(true);
+
+  // Check screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setShow(window.innerWidth >= 1200);
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function handlePrev() {
-
     value >= 0 ? "" : setValue((prev) => prev + 103);
   }
+
   function handleNext() {
     value <= -206 ? "" : setValue((prev) => prev - 103); 
   }
-  
+
+  if (!show) return null; // Don't render on small screens
+
   return (
     <div className="Dishes-Container" style={{ marginTop: "35px" }}>
       <div className="restaurantSlide-inside-container">
@@ -36,11 +49,13 @@ export default function RestaurantSlide({ data , restaurants }) {
             />
           </div>
         </div>
-         <div
+        <div
           className="restaurantSlide-card-container"
           style={{ transform: `translateX(${value}%)` }}
         >
-          <Cards data={restaurants[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants}/>
+          <Cards 
+            data={restaurants[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants}
+          />
         </div>
       </div>
       <hr />

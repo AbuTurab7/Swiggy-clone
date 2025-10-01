@@ -1,62 +1,112 @@
-.custom-offcanvas {
-  width: 38% !important;        
-}
-.offCanvas-main-container{
-    margin-left: 25%;
-    margin-top: 3%;
-    width: 65%;
-}
-.offCanvas-input-container{
-    position: relative;
-}
-#cancel-btn{
-    position: absolute;
-    right: 4%;
-    top:32%;
-    background-color: white;
-    border: none;
-    font-size: 14px;
-    color: #FF5200;
-}
-#offCanvas-input{
-    font-size: 15px;
-    height: 50px;
-    width: 100%;
-    padding: 12px 35px 12px 20px;
-    border: solid 1px rgba(2, 6, 12, .2);
-}
-#offCanvas-input:focus{
-    outline: none;
-    box-shadow: 0 0 15px rgba(2, 6, 12, .2);
-}
-.offCanvas-result-container{
-    margin-top: 5%;
-    padding: 20px 20px 20px 20px;
-}
-.offCanvas-result-container #result{
-    margin-left: 26px;
-    margin-bottom: 15px;
-}
-.offCanvas-result-container ul {
-    padding: 0;
-}
-.offCanvas-result-container ul li{
-    display: flex;
-    gap: 10px;
-}
-.result-description{
-    width: 100%;
-    border-bottom: dotted 2px rgba(2, 6, 12, .2);
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-.result-description #cityName{
-    font-size: 16px;
-    color: #02060C;
-}
-.result-description #cityName:hover{
-    color: #FF5200;
-    cursor: pointer;
+/* Location Offcanvas ONLY */
+.location-offcanvas.custom-offcanvas {
+  width: 38% !important;  /* default laptop/desktop */
 }
 
+.location-offcanvas .offCanvas-main-container {
+  margin: 3% auto;
+  width: 85%;
+}
 
+/* Input */
+.location-offcanvas #offCanvas-input {
+  font-size: 14px;
+  height: 55px;
+  padding: 14px 40px 14px 20px;
+  width: 100%;
+}
+
+/* Cancel button */
+.location-offcanvas #cancel-btn {
+  position: absolute;
+  top: 30%;
+  right: 4%;
+  background-color: white;
+  border: none;
+  font-size: 15px;
+  color: #FF5200;
+  cursor: pointer;
+}
+
+/* Results list */
+.location-offcanvas .offCanvas-result-container {
+  margin-top: 5%;
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.location-offcanvas .offCanvas-result-container ul {
+  padding: 0;
+}
+
+.location-offcanvas .offCanvas-result-container ul li {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.location-offcanvas .result-description {
+  width: 100%;
+  border-bottom: dotted 2px rgba(2, 6, 12, 0.2);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.location-offcanvas #cityName {
+  font-size: 16px;
+  color: #02060C;
+}
+
+.location-offcanvas #cityName:hover {
+  color: #FF5200;
+}
+
+/* Secondary text */
+.location-offcanvas .secondary-text {
+  font-size: 13px;
+  color: #02060C80;
+}
+
+/* Large desktops */
+@media (min-width: 1600px) {
+  .location-offcanvas.custom-offcanvas { width: 40% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 80%; }
+  .location-offcanvas #offCanvas-input { font-size: 14px; height: 60px; }
+  .location-offcanvas #cancel-btn { font-size: 16px; }
+}
+
+/* Medium laptops */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .location-offcanvas.custom-offcanvas { width: 38% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 85%; }
+  .location-offcanvas #offCanvas-input { font-size: 14px; height: 58px; }
+}
+
+/* Tablets */
+@media (max-width: 1199px) {
+  .location-offcanvas.custom-offcanvas { width: 60% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 90%; }
+  .location-offcanvas #offCanvas-input { font-size: 14px; height: 55px; }
+}
+
+/* Small tablets / landscape mobiles */
+@media (max-width: 992px) {
+  .location-offcanvas.custom-offcanvas { width: 60% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 95%; }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+  .location-offcanvas.custom-offcanvas { width: 80% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 100%; }
+  .location-offcanvas #offCanvas-input { font-size: 13px; height: 50px; }
+  .location-offcanvas #cancel-btn { font-size: 14px; }
+}
+
+/* Very small mobiles */
+@media (max-width: 480px) {
+  .location-offcanvas.custom-offcanvas { width: 90% !important; }
+  .location-offcanvas .offCanvas-main-container { width: 100%; margin: 2% auto; }
+}

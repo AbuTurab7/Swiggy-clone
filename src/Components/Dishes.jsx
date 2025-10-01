@@ -1,18 +1,33 @@
-import { IoIosArrowRoundBack } from "react-icons/io";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { useState } from "react";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+import { useState, useEffect } from "react";
 import "./dishes.css";
 
 export default function Dishes({ images }) {
   const [value, setValue] = useState(0); 
+  const [show, setShow] = useState(true);
+
+  // Check screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setShow(window.innerWidth >= 1200);
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function handlePrev() {
     value >= 0 ? "" : setValue((prev) => prev + 40);
   }
+
   function handleNext() {
     value <= -60 ? "" : setValue((prev) => prev - 40);
   }
-  
+
+  if (!show) return null; // Don't render on small screens
+
   return (
     <div className="Dishes-Container">
       <div className="dishes-inside-container">
@@ -41,7 +56,8 @@ export default function Dishes({ images }) {
               width={"150px"}
               height={"185px"}
               src={`https://media-assets.swiggy.com/swiggy/image/upload/${img.imageId}`}
-            ></img>
+              alt="dish"
+            />
           ))}
         </div>
       </div>
