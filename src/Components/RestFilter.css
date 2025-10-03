@@ -186,3 +186,11 @@
 .RestFilter-container img.On {
   left: 31px;
 }
+
+
+/* responsive */
+@media (max-width: 600px) {
+  .RestFilter-container{
+    margin-left: 5px;
+  }
+}

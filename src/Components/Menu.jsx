@@ -5,8 +5,8 @@ import RestFilter from "./RestFilter";
 import "./menu.css";
 export default function Menu({ menu , restInfo }) {
   const filteredMenu = menu?.filter((data) => (data?.card?.card?.itemCards || data?.card?.card?.categories));
-  console.log(filteredMenu);
-  console.log(menu);
+  // console.log(filteredMenu);
+  // console.log(menu);
 
   return (
     <>
@@ -18,7 +18,9 @@ export default function Menu({ menu , restInfo }) {
         </div>
         <div className="restaurant-menu-search-container">
           <div className="restaurant-menu-search">
-            <p style={{ fontSize: "14px" }}>Search for dishes</p>
+            <div className="restaurant-menu-search-text">
+              <p style={{ fontSize: "14px" }}>Search for dishes</p>
+            </div>
             <IoSearchOutline />
           </div>
         </div>

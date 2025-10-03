@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 import { MdStars, MdLocationPin } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
@@ -7,33 +7,50 @@ import "./restaurant.css";
 import ModalComponent from "./ModalComponent";
 import Menu from "./Menu";
 import { RestShimmer } from "./Shimmer";
+import { Coordinates } from "./ContextApi";
 
 export default function Restaurant() {
   
   const id = useParams();
   const mainId = id.id.split("-").at(-1).split("rest").at(-1);
+  const {
+      coords: { lat, lng },
+    } = useContext(Coordinates);
   
   const [restaurantInfo, setRestaurantInfo] = useState([]);
   const [dealsSlide, setDealsSlide] = useState([]);
   const [menu, setMenu] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
-
   const [value, setValue] = useState(0); 
+  const [show, setShow] = useState(true);
 
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setShow(window.innerWidth >= 1200);
+    };
+
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   function handlePrev() {
-    value >= 60 ? "" : setValue((prev) => prev + 70);
+    value >= 45 ? "" : setValue((prev) => prev + 45);
   }
 
   function handleNext() {
-    value <= -60 ? "" : setValue((prev) => prev - 70);
+    value <= -45 ? "" : setValue((prev) => prev - 45);
   }
 
   async function fetchMenu() {
     try {
-      const res = await fetch(
-        `https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.057437&lng=78.9381729&restaurantId=${mainId}&submitAction=ENTER`
-      );
+      // const res = await fetch(
+      //   `https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.057437&lng=78.9381729&restaurantId=${mainId}&submitAction=ENTER`
+      // );
+      const res = await fetch(`http://localhost:5050/api/menu?id=${mainId}&lat=${lat}&lng=${lng}`);
+
       const result = await res.json();
       console.log(result);
       setRestaurantInfo(result?.data?.cards[2]?.card?.card?.info);
@@ -101,7 +118,9 @@ export default function Restaurant() {
             </div>
           </div>
         </div>
-        <div className="deals-slider-container">
+        {
+          show && (
+            <div className="deals-slider-container">
           <div className="Dishes-Container" style={{ marginTop: "35px" }}>
             <div
               className="restaurantSlide-inside-container"
@@ -123,11 +142,11 @@ export default function Restaurant() {
                 <div className="dishes-arrow-container">
                   <IoIosArrowRoundBack
                     onClick={handlePrev}
-                    className={value >= 60 ? "disabled" : ""}
+                    className={value >= 45 ? "disabled" : ""}
                   />
                   <IoIosArrowRoundForward
                     onClick={handleNext}
-                    className={value <= -60 ? "disabled" : ""}
+                    className={value <= -45 ? "disabled" : ""}
                   />
                 </div>
               </div>
@@ -171,6 +190,8 @@ export default function Restaurant() {
             </div>
           </div>
         </div>
+          )
+        }
         <div className="restaurant-menu-main-container">
           <Menu menu={menu} restInfo={restaurantInfo}/>
         </div>

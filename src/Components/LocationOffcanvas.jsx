@@ -13,9 +13,7 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
   async function fetchSearches(val) {
     try {
       if (!val) return;
-      const res = await fetch(
-        `https://www.swiggy.com/dapi/misc/place-autocomplete?input=${val}`
-      );
+      const res = await fetch(`http://localhost:5050/api/autocomplete?input=${val}`);
       const result = await res.json();
       setSearchData(result?.data || []);
     } catch (error) {
@@ -26,9 +24,7 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
   async function fetchCoords(id) {
     try {
       if (!id) return;
-      const res = await fetch(
-        `https://www.swiggy.com/dapi/misc/address-recommend?place_id=${id}`
-      );
+      const res = await fetch(`http://localhost:5050/api/address-recommend?place_id=${id}`);
       const result = await res.json();
       const loc = result?.data[0]?.geometry.location;
       if (loc) {
@@ -73,6 +69,10 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
           {/* Results */}
           {inputValue ? (
             <div className="offCanvas-result-container">
+             { !searchData ? (
+              <div className="loader">
+             </div>
+             ) : (
               <ul>
                 {searchData.map((search, i) => (
                   <li key={i} onClick={() => fetchCoords(search?.place_id)}>
@@ -86,6 +86,7 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
                   </li>
                 ))}
               </ul>
+             )}
             </div>
           ) : (
             <div className="offCanvas-result-container border">

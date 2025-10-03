@@ -1,6 +1,7 @@
 import './restaurantBoxes.css'
 export default function RestaurantBoxes({ BoxesData }) {
  
+ 
   return (
     <div className="boxes-main-container">
         <p style={{ fontSize: "20px", color: "black", fontWeight: "650" }}>{BoxesData.title}</p>

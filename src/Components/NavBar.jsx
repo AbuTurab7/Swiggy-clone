@@ -15,7 +15,7 @@ import LocationOffcanvas from "./LocationOffcanvas";
 import { Outlet, useNavigate } from "react-router";
 import Container from "react-bootstrap/Container";
 import Popover from "react-bootstrap/Popover";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -26,20 +26,21 @@ import toast from "react-hot-toast";
 
 import "./offCanvas.css";
 import "./navbar.css";
+import { Coordinates } from "./ContextApi";
 
 export default function NavBar() {
   const cart = useSelector((state) => state.cartSlice.cartItems);
   const userData = useSelector((state) => state.authSlice.userData);
 
-  const [address, setAddress] = useState("Chhindwara, Madhya Pradesh 4800");
+  const [address, setAddress] = useState("Lucknow, Uttar Pradesh 4800");
 
-  /* ✅ State for LocationOffcanvas */
+  /*  State for LocationOffcanvas */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleAddress = (data) => setAddress(data);
 
-  /* ✅ State for Hamburger Offcanvas */
+  /*  State for Hamburger Offcanvas */
   const [showMenu, setShowMenu] = useState(false);
   const handleMenuClose = () => setShowMenu(false);
   const handleMenuShow = () => setShowMenu(true);

@@ -7,27 +7,26 @@ export default function RestaurantSlide({ data, restaurants }) {
   const [value, setValue] = useState(0); 
   const [show, setShow] = useState(true);
 
-  // Check screen width
   useEffect(() => {
     const handleResize = () => {
       setShow(window.innerWidth >= 1200);
     };
 
-    handleResize(); // initial check
+    handleResize(); 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   function handlePrev() {
-    value >= 0 ? "" : setValue((prev) => prev + 103);
+    value >= 0 ? "" : setValue((prev) => prev + 92);
   }
 
   function handleNext() {
-    value <= -206 ? "" : setValue((prev) => prev - 103); 
+    value <= -92 ? "" : setValue((prev) => prev - 92); 
   }
 
-  if (!show) return null; // Don't render on small screens
+  if (!show) return null; 
 
   return (
     <div className="Dishes-Container" style={{ marginTop: "35px" }}>
@@ -45,7 +44,7 @@ export default function RestaurantSlide({ data, restaurants }) {
             />
             <IoIosArrowRoundForward
               onClick={handleNext}
-              className={value <= -206 ? "disabled" : ""}
+              className={value <= -92 ? "disabled" : ""}
             />
           </div>
         </div>

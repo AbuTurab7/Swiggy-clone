@@ -67,13 +67,21 @@
 
   .restaurant-menu-search-container .restaurant-menu-search {
     width: 70%;
+    
   }
-
+  
   .restaurant-menu-header {
     gap: 6px;
     font-size: 14px;
   }
 }
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .restaurant-menu-search {
+    padding-left: 80px;
+  }
+}
+
 
 /* Mobile ≤768px */
 @media (max-width: 768px) {

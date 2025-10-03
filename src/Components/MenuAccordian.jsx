@@ -106,7 +106,7 @@ function MenuAccordian({ menuData, restInfo }) {
                             {(item?.card?.info?.defaultPrice ||
                               item?.card?.info?.price) / 100}
                           </p>
-                          <p style={{ fontSize: "13px", color: "#02060C99" }}>
+                          <p id="description" style={{ fontSize: "13px", color: "#02060C99" }}>
                             {" "}
                             {item?.card?.info?.description}
                           </p>
@@ -140,7 +140,7 @@ function MenuAccordian({ menuData, restInfo }) {
                             </button>
                           )}
                           {item?.card?.info?.addons && (
-                            <p style={{ fontSize: "11px", color: "#02060C73" }}>
+                            <p id="Customisable" style={{ fontSize: "11px", color: "#02060C73" }}>
                               Customisable
                             </p>
                           )}
