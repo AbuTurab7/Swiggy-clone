@@ -127,7 +127,7 @@ function MenuAccordian({ menuData, restInfo }) {
                               </button>
                             )}
                             {info?.addons && (
-                              <p style={{ fontSize: "11px", color: "#02060C73" }}>Customisable</p>
+                              <p id="Customisable" style={{ fontSize: "11px", color: "#02060C73" }}>Customisable</p>
                             )}
                           </div>
                         </div>
@@ -213,7 +213,7 @@ function MenuAccordian({ menuData, restInfo }) {
                                     </button>
                                   )}
                                   {info?.addons && (
-                                    <p style={{ fontSize: "11px", color: "#02060C73" }}>
+                                    <p id="Customisable" style={{ fontSize: "11px", color: "#02060C73" }}>
                                       Customisable
                                     </p>
                                   )}
