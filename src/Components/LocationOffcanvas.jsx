@@ -1,6 +1,5 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { GoLocation } from "react-icons/go";
-import { PiClockCounterClockwise } from "react-icons/pi";
 import "./offCanvas.css";
 import { useContext, useState } from "react";
 import { Coordinates } from "./ContextApi";
@@ -12,6 +11,7 @@ export default function LocationOffcanvas({
 }) {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
+  const [recentSearch, setRecentSearch] = useState( JSON.parse(localStorage.getItem("recentSearches")) || []);
   const { setCoords } = useContext(Coordinates);
 
   async function fetchSearches(val) {
@@ -45,6 +45,20 @@ export default function LocationOffcanvas({
     }
   }
 
+
+function setRecentSearchData(value) {
+  setRecentSearch((prev) => {
+    const filtered = prev.filter((item) => item.place_id !== value.place_id);
+
+    const updated = [value, ...filtered].slice(0, 4);
+
+    localStorage.setItem("recentSearches", JSON.stringify(updated));
+
+    return updated;
+  });
+}
+
+
   return (
     <Offcanvas
       show={show}
@@ -76,13 +90,21 @@ export default function LocationOffcanvas({
 
           {/* Results */}
           {inputValue ? (
-            <div className="offCanvas-result-container">
-              {!searchData ? (
+            <div className="offCanvas-result-container border">
+              {!searchData.length ? (
                 <div className="loader"></div>
               ) : (
                 <ul>
                   {searchData.map((search, i) => (
-                    <li key={i} onClick={() => fetchCoords(search?.place_id)}>
+                    <li
+                      key={i}
+                      onClick={() => {
+                        console.log(search);
+                        setRecentSearchData(search);
+                        setInputValue("");
+                        fetchCoords(search?.place_id);
+                      }}
+                    >
                       <div className="result-icon-container">
                         <GoLocation />
                       </div>
@@ -100,41 +122,89 @@ export default function LocationOffcanvas({
               )}
             </div>
           ) : (
+            /* Recent searches */
             <div className="offCanvas-result-container border">
-              <p id="result">RECENT SEARCHES</p>
-              <ul>
-                <li>
-                  <div className="result-icon-container">
-                    <PiClockCounterClockwise />
-                  </div>
-                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
-                    <p id="cityName">Mumbai</p>
-                    <p className="secondary-text">Maharastra, India</p>
-                  </div>
-                </li>
-                <li>
-                  <div className="result-icon-container">
-                    <PiClockCounterClockwise />
-                  </div>
-                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
-                    <p id="cityName">Bangalore</p>
-                    <p className="secondary-text">Karnataka, India</p>
-                  </div>
-                </li>
-                <li>
-                  <div className="result-icon-container">
-                    <PiClockCounterClockwise />
-                  </div>
-                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
-                    <p id="cityName">Lucknow</p>
-                    <p className="secondary-text">Uttar Pradesh, India</p>
-                  </div>
-                </li>
-              </ul>
+              {!recentSearch ? (
+                <div className="loader"></div>
+              ) : (
+                <>
+                  <ul>
+                    {recentSearch?.length > 0 && <p id="result">RECENT SEARCHES</p>}
+                    {recentSearch.map((search, i) => (
+                      <li
+                        key={i}
+                        onClick={() => {
+                          console.log(search);
+                          fetchCoords(search?.place_id);
+                        }}
+                      >
+                        <div className="result-icon-container">
+                          <GoLocation />
+                        </div>
+                        <div
+                          className="result-description"
+                          onClick={handleClose}
+                        >
+                          <p id="cityName">
+                            {search?.structured_formatting?.main_text}
+                          </p>
+                          <p className="secondary-text">
+                            {search?.structured_formatting?.secondary_text}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
+            // <div className="offCanvas-result-container border">
+            //   <p id="result">RECENT SEARCHES</p>
+            //   <ul>
+            //     <li>
+            //       <div className="result-icon-container">
+            //         <PiClockCounterClockwise />
+            //       </div>
+            //       <div
+            //         className="result-description"
+            //         onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}
+            //       >
+            //         <p id="cityName">Mumbai</p>
+            //         <p className="secondary-text">Maharastra, India</p>
+            //       </div>
+            //     </li>
+            //     <li>
+            //       <div className="result-icon-container">
+            //         <PiClockCounterClockwise />
+            //       </div>
+            //       <div
+            //         className="result-description"
+            //         onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}
+            //       >
+            //         <p id="cityName">Bangalore</p>
+            //         <p className="secondary-text">Karnataka, India</p>
+            //       </div>
+            //     </li>
+            //     <li>
+            //       <div className="result-icon-container">
+            //         <PiClockCounterClockwise />
+            //       </div>
+            //       <div
+            //         className="result-description"
+            //         onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}
+            //       >
+            //         <p id="cityName">Lucknow</p>
+            //         <p className="secondary-text">Uttar Pradesh, India</p>
+            //       </div>
+            //     </li>
+            //   </ul>
+            // </div>
           )}
         </div>
       </Offcanvas.Body>
     </Offcanvas>
   );
 }
+
+
+// const recentSearch_1 = {description: 'Delhi, India', place_id: 'ChIJLbZ-NFv9DDkRQJY4FbcFcgM', types: Array(3), matched_substrings: Array(1), terms: Array(2)}
