@@ -11,7 +11,9 @@ export default function LocationOffcanvas({
 }) {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [recentSearch, setRecentSearch] = useState( JSON.parse(localStorage.getItem("recentSearches")) || []);
+  const [recentSearch, setRecentSearch] = useState(
+    JSON.parse(localStorage.getItem("recentSearches")) || []
+  );
   const { setCoords } = useContext(Coordinates);
 
   async function fetchSearches(val) {
@@ -45,19 +47,17 @@ export default function LocationOffcanvas({
     }
   }
 
+  function setRecentSearchData(value) {
+    setRecentSearch((prev) => {
+      const filtered = prev.filter((item) => item.place_id !== value.place_id);
 
-function setRecentSearchData(value) {
-  setRecentSearch((prev) => {
-    const filtered = prev.filter((item) => item.place_id !== value.place_id);
+      const updated = [value, ...filtered].slice(0, 4);
 
-    const updated = [value, ...filtered].slice(0, 4);
+      localStorage.setItem("recentSearches", JSON.stringify(updated));
 
-    localStorage.setItem("recentSearches", JSON.stringify(updated));
-
-    return updated;
-  });
-}
-
+      return updated;
+    });
+  }
 
   return (
     <Offcanvas
@@ -90,7 +90,7 @@ function setRecentSearchData(value) {
 
           {/* Results */}
           {inputValue ? (
-            <div className="offCanvas-result-container border">
+            <div className="offCanvas-result-container">
               {!searchData.length ? (
                 <div className="loader"></div>
               ) : (
@@ -123,13 +123,19 @@ function setRecentSearchData(value) {
             </div>
           ) : (
             /* Recent searches */
-            <div className="offCanvas-result-container border">
+            <div
+              className={`offCanvas-result-container ${
+                recentSearch?.length > 0 ? "border" : ""
+              }`}
+            >
               {!recentSearch ? (
                 <div className="loader"></div>
               ) : (
                 <>
                   <ul>
-                    {recentSearch?.length > 0 && <p id="result">RECENT SEARCHES</p>}
+                    {recentSearch?.length > 0 && (
+                      <p id="result">RECENT SEARCHES</p>
+                    )}
                     {recentSearch.map((search, i) => (
                       <li
                         key={i}
@@ -205,6 +211,5 @@ function setRecentSearchData(value) {
     </Offcanvas>
   );
 }
-
 
 // const recentSearch_1 = {description: 'Delhi, India', place_id: 'ChIJLbZ-NFv9DDkRQJY4FbcFcgM', types: Array(3), matched_substrings: Array(1), terms: Array(2)}
