@@ -5,7 +5,11 @@ import "./offCanvas.css";
 import { useContext, useState } from "react";
 import { Coordinates } from "./ContextApi";
 
-export default function LocationOffcanvas({ show, handleClose , handleAddress }) {
+export default function LocationOffcanvas({
+  show,
+  handleClose,
+  handleAddress,
+}) {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
   const { setCoords } = useContext(Coordinates);
@@ -13,7 +17,9 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
   async function fetchSearches(val) {
     try {
       if (!val) return;
-      const res = await fetch(`http://localhost:5050/api/autocomplete?input=${val}`);
+      const res = await fetch(
+        `https://swiggy-netfily-proxy.netlify.app/.netlify/functions/swiggy?type=autocomplete&input=${val}`
+      );
       const result = await res.json();
       setSearchData(result?.data || []);
     } catch (error) {
@@ -24,7 +30,9 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
   async function fetchCoords(id) {
     try {
       if (!id) return;
-      const res = await fetch(`http://localhost:5050/api/address-recommend?place_id=${id}`);
+      const res = await fetch(
+        `https://swiggy-netfily-proxy.netlify.app/.netlify/functions/swiggy?type=address-recommend&place_id=${id}`
+      );
       const result = await res.json();
       const loc = result?.data[0]?.geometry.location;
       if (loc) {
@@ -69,46 +77,55 @@ export default function LocationOffcanvas({ show, handleClose , handleAddress })
           {/* Results */}
           {inputValue ? (
             <div className="offCanvas-result-container">
-             { !searchData ? (
-              <div className="loader">
-             </div>
-             ) : (
-              <ul>
-                {searchData.map((search, i) => (
-                  <li key={i} onClick={() => fetchCoords(search?.place_id)}>
-                    <div className="result-icon-container">
-                      <GoLocation />
-                    </div>
-                    <div className="result-description" onClick={handleClose} >
-                      <p id="cityName">{search?.structured_formatting?.main_text}</p>
-                      <p className="secondary-text">{search?.structured_formatting?.secondary_text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-             )}
+              {!searchData ? (
+                <div className="loader"></div>
+              ) : (
+                <ul>
+                  {searchData.map((search, i) => (
+                    <li key={i} onClick={() => fetchCoords(search?.place_id)}>
+                      <div className="result-icon-container">
+                        <GoLocation />
+                      </div>
+                      <div className="result-description" onClick={handleClose}>
+                        <p id="cityName">
+                          {search?.structured_formatting?.main_text}
+                        </p>
+                        <p className="secondary-text">
+                          {search?.structured_formatting?.secondary_text}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ) : (
             <div className="offCanvas-result-container border">
               <p id="result">RECENT SEARCHES</p>
               <ul>
                 <li>
-                  <div className="result-icon-container"><PiClockCounterClockwise /></div>
-                  <div className="result-description">
+                  <div className="result-icon-container">
+                    <PiClockCounterClockwise />
+                  </div>
+                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
                     <p id="cityName">Mumbai</p>
                     <p className="secondary-text">Maharastra, India</p>
                   </div>
                 </li>
                 <li>
-                  <div className="result-icon-container"><PiClockCounterClockwise /></div>
-                  <div className="result-description">
+                  <div className="result-icon-container">
+                    <PiClockCounterClockwise />
+                  </div>
+                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
                     <p id="cityName">Bangalore</p>
                     <p className="secondary-text">Karnataka, India</p>
                   </div>
                 </li>
                 <li>
-                  <div className="result-icon-container"><PiClockCounterClockwise /></div>
-                  <div className="result-description">
+                  <div className="result-icon-container">
+                    <PiClockCounterClockwise />
+                  </div>
+                  <div className="result-description" onClick={() => fetchCoords("ChIJN3GxoW7O5zsR4_XLO7GOGf4")}>
                     <p id="cityName">Lucknow</p>
                     <p className="secondary-text">Uttar Pradesh, India</p>
                   </div>
