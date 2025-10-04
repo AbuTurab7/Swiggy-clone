@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, clearCart } from "../Utilities/cartSlice";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
-function MenuAccordian({ menuData, restInfo }) {
 
+function MenuAccordian({ menuData, restInfo }) {
   const cart = useSelector((state) => state.cartSlice.cartItems);
   const getResInfoFromLocalStore = useSelector(
     (state) => state.cartSlice.restInfo
@@ -34,7 +34,7 @@ function MenuAccordian({ menuData, restInfo }) {
         setPendingItem(item);
       }
     } else {
-      toast.error("Item Already Added ");
+      toast.error("Item Already Added");
     }
   }
 
@@ -49,230 +49,192 @@ function MenuAccordian({ menuData, restInfo }) {
   }
 
   const VEG =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/180px-Veg_symbol.svg.png?20131205102827";
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/180px-Veg_symbol.svg.png";
   const NON_VEG =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/180px-Non_veg_symbol.svg.png?20131205102929";
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/180px-Non_veg_symbol.svg.png";
+
   return (
     <>
-      {menuData.map((menu, i) => {
+      {menuData?.map((menu, i) => {
         const card = menu?.card?.card;
-        if (card?.itemCards) {
+        if (!card) return null;
+
+        // Single-level items
+        if (card?.itemCards && card.itemCards.length > 0) {
           return (
             <div className="filtered-menu-card-container" key={i}>
-              <Accordion
-                defaultActiveKey={[`0`]}
-                alwaysOpen
-                className="custom-accordion"
-              >
-                <Accordion.Item eventKey={`0`}>
+              <Accordion defaultActiveKey={["0"]} alwaysOpen className="custom-accordion">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>
                     <span style={{ fontWeight: "700" }}>
-                      {menu?.card?.card?.title}({card?.itemCards.length})
+                      {card.title} ({card.itemCards?.length || 0})
                     </span>
                   </Accordion.Header>
                   <Accordion.Body>
-                    {card?.itemCards.map((item, i) => (
-                      <div className="filtered-menu-card" key={i}>
-                        <div className="filtered-menu-card-details">
-                          <div className="filtered-menu-logo-container">
-                            <img
-                              height={"15px"}
-                              width={"15px"}
-                              src={
-                                item?.card?.info?.itemAttribute
-                                  ?.vegClassifier === "VEG"
-                                  ? VEG
-                                  : NON_VEG
-                              }
-                              alt="logo"
-                            />
-                            {item?.card?.info?.isBestseller && (
-                              <div className="bestseller-container">
-                                <IoMdStarOutline style={{ fontSize: "14px" }} />{" "}
-                                <p
-                                  style={{ fontSize: "14px", marginTop: "2px" }}
-                                >
-                                  Bestseller
-                                </p>
-                              </div>
+                    {card.itemCards.map((item, idx) => {
+                      const info = item?.card?.info;
+                      return (
+                        <div className="filtered-menu-card" key={idx}>
+                          <div className="filtered-menu-card-details">
+                            <div className="filtered-menu-logo-container">
+                              <img
+                                height="15px"
+                                width="15px"
+                                src={info?.itemAttribute?.vegClassifier === "VEG" ? VEG : NON_VEG}
+                                alt="logo"
+                              />
+                              {info?.isBestseller && (
+                                <div className="bestseller-container">
+                                  <IoMdStarOutline style={{ fontSize: "14px" }} />
+                                  <p style={{ fontSize: "14px", marginTop: "2px" }}>
+                                    Bestseller
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                            <p style={{ fontSize: "18px", color: "#02060CBF" }}>
+                              {info?.name}
+                            </p>
+                            <p style={{ fontSize: "15px", color: "#02060CEB" }}>
+                              ₹{(info?.defaultPrice || info?.price) / 100}
+                            </p>
+                            <p style={{ fontSize: "13px", color: "#02060C99" }}>
+                              {info?.description}
+                            </p>
+                          </div>
+                          <div className="filtered-menu-card-image-container">
+                            <div className="img-container">
+                              <img
+                                className={info?.nextAvailableAtMessage ? "blackAndwhite" : ""}
+                                src={
+                                  info?.imageId
+                                    ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${info.imageId}`
+                                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/800px-Image_not_available.png"
+                                }
+                                alt="item image"
+                              />
+                            </div>
+                            {info?.nextAvailableAtMessage ? (
+                              <button className="btn-store-closed" disabled>
+                                {info?.nextAvailableAtMessage}
+                              </button>
+                            ) : (
+                              <button
+                                className="btn-store-open"
+                                onClick={() => handleAddCart(info)}
+                              >
+                                ADD
+                              </button>
+                            )}
+                            {info?.addons && (
+                              <p style={{ fontSize: "11px", color: "#02060C73" }}>Customisable</p>
                             )}
                           </div>
-                          <p style={{ fontSize: "18px", color: "#02060CBF" }}>
-                            {item?.card?.info?.name}
-                          </p>
-                          <p style={{ fontSize: "15px", color: "#02060CEB" }}>
-                            {" "}
-                            ₹
-                            {(item?.card?.info?.defaultPrice ||
-                              item?.card?.info?.price) / 100}
-                          </p>
-                          <p id="description" style={{ fontSize: "13px", color: "#02060C99" }}>
-                            {" "}
-                            {item?.card?.info?.description}
-                          </p>
                         </div>
-                        <div className="filtered-menu-card-image-container">
-                          <div className="img-container">
-                            <img
-                              className={
-                                item?.card?.info?.nextAvailableAtMessage
-                                  ? "blackAndwhite"
-                                  : ""
-                              }
-                              src={
-                                item?.card?.info?.imageId
-                                  ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${item.card.info.imageId}`
-                                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/800px-Image_not_available.png"
-                              }
-                              alt="item image"
-                            />
-                          </div>
-                          {item?.card?.info?.nextAvailableAtMessage ? (
-                            <button className="btn-store-closed" disabled>
-                              {item?.card?.info?.nextAvailableAtMessage}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => handleAddCart(item?.card?.info)}
-                              className="btn-store-open"
-                            >
-                              ADD
-                            </button>
-                          )}
-                          {item?.card?.info?.addons && (
-                            <p id="Customisable" style={{ fontSize: "11px", color: "#02060C73" }}>
-                              Customisable
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             </div>
           );
-        } else {
+        }
+
+        // Nested categories
+        if (card?.categories && card.categories.length > 0) {
           return (
             <div className="filtered-menu-card-container" key={i}>
               <p id="nested-menu-card-container-title">
-                {card.title}({card?.categories.length})
+                {card.title} ({card?.categories?.length || 0})
               </p>
-              {card?.categories.map((item, idx) => (
-                <div className="nested-menu-card-container" key={idx}>
-                  <Accordion
-                    defaultActiveKey={[`0`]}
-                    alwaysOpen
-                    className="custom-accordion-nested"
-                  >
-                    <Accordion.Item eventKey={`0`}>
-                      <Accordion.Header>
-                        {item?.title}({item?.itemCards.length})
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        {card?.categories.map((singleItem, i) => (
-                          <div className="singleItem-container" key={i}>
-                            {singleItem?.itemCards.map((item, i) => (
+              {card.categories.map((cat, idx) => {
+                if (!cat?.itemCards || cat.itemCards.length === 0) return null;
+                return (
+                  <div className="nested-menu-card-container" key={idx}>
+                    <Accordion
+                      defaultActiveKey={["0"]}
+                      alwaysOpen
+                      className="custom-accordion-nested"
+                    >
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>
+                          {cat.title} ({cat.itemCards?.length || 0})
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          {cat.itemCards.map((item, i) => {
+                            const info = item?.card?.info;
+                            return (
                               <div className="filtered-menu-card" key={i}>
                                 <div className="filtered-menu-card-details">
                                   <div className="filtered-menu-logo-container">
                                     <img
-                                      height={"15px"}
-                                      width={"15px"}
+                                      height="15px"
+                                      width="15px"
                                       src={
-                                        item?.card?.info?.itemAttribute
-                                          ?.vegClassifier === "VEG"
+                                        info?.itemAttribute?.vegClassifier === "VEG"
                                           ? VEG
                                           : NON_VEG
                                       }
                                       alt="logo"
                                     />
                                   </div>
-                                  <p
-                                    style={{
-                                      fontSize: "18px",
-                                      color: "#02060CBF",
-                                    }}
-                                  >
-                                    {item?.card?.info?.name}
+                                  <p style={{ fontSize: "18px", color: "#02060CBF" }}>
+                                    {info?.name}
                                   </p>
-                                  <p
-                                    style={{
-                                      fontSize: "15px",
-                                      color: "#02060CEB",
-                                    }}
-                                  >
-                                    {" "}
-                                    ₹
-                                    {(item?.card?.info?.defaultPrice ||
-                                      item?.card?.info?.price) / 100}
+                                  <p style={{ fontSize: "15px", color: "#02060CEB" }}>
+                                    ₹{(info?.defaultPrice || info?.price) / 100}
                                   </p>
-                                  <p
-                                    style={{
-                                      fontSize: "13px",
-                                      color: "#02060C99",
-                                    }}
-                                  >
-                                    {" "}
-                                    {item?.card?.info?.description}
+                                  <p style={{ fontSize: "13px", color: "#02060C99" }}>
+                                    {info?.description}
                                   </p>
                                 </div>
                                 <div className="filtered-menu-card-image-container">
                                   <div className="img-container">
                                     <img
-                                      className={
-                                        item?.card?.info?.nextAvailableAtMessage
-                                          ? "blackAndwhite"
-                                          : ""
-                                      }
+                                      className={info?.nextAvailableAtMessage ? "blackAndwhite" : ""}
                                       src={
-                                        item?.card?.info?.imageId
-                                          ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${item.card.info.imageId}`
+                                        info?.imageId
+                                          ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${info.imageId}`
                                           : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/800px-Image_not_available.png"
                                       }
                                       alt="item image"
                                     />
                                   </div>
-                                  {item?.card?.info?.nextAvailableAtMessage ? (
-                                    <button
-                                      className="btn-store-closed"
-                                      disabled
-                                    >
-                                      {item?.card?.info?.nextAvailableAtMessage}
+                                  {info?.nextAvailableAtMessage ? (
+                                    <button className="btn-store-closed" disabled>
+                                      {info?.nextAvailableAtMessage}
                                     </button>
                                   ) : (
                                     <button
                                       className="btn-store-open"
-                                      onClick={() =>
-                                        handleAddCart(item?.card?.info)
-                                      }
+                                      onClick={() => handleAddCart(info)}
                                     >
                                       ADD
                                     </button>
                                   )}
-
-                                  <p
-                                    style={{
-                                      fontSize: "11px",
-                                      color: "#02060C73",
-                                    }}
-                                  >
-                                    Customisable
-                                  </p>
+                                  {info?.addons && (
+                                    <p style={{ fontSize: "11px", color: "#02060C73" }}>
+                                      Customisable
+                                    </p>
+                                  )}
                                 </div>
                               </div>
-                            ))}
-                          </div>
-                        ))}
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </div>
-              ))}
+                            );
+                          })}
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                  </div>
+                );
+              })}
             </div>
           );
         }
+
+        return null;
       })}
+
+      {/* Toasts */}
       {addShow && (
         <div className="itemAddedToast">
           <p>{cart.length} item Added</p>
@@ -286,18 +248,11 @@ function MenuAccordian({ menuData, restInfo }) {
       )}
       {diffRest && (
         <div className="diffRestToast">
-          <p
-            style={{
-              fontSize: "20px",
-              color: "#02060C",
-              marginBottom: "5px",
-            }}
-          >
+          <p style={{ fontSize: "20px", color: "#02060C", marginBottom: "5px" }}>
             Items already in cart
           </p>
           <p style={{ fontSize: "13px", color: "#02060CCC" }}>
-            Your cart contains items from other restaurant. Would you like to
-            reset your cart for adding items from this restaurant?
+            Your cart contains items from another restaurant. Reset cart to add items from this restaurant?
           </p>
           <div className="diffRestToast-btn-container">
             <button id="no" onClick={() => setDiffRest(false)}>

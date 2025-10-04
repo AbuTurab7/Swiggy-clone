@@ -25,15 +25,12 @@ export default function Restaurant() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const handleResize = () => {
-      setShow(window.innerWidth >= 1200);
-    };
-
+    const handleResize = () => setShow(window.innerWidth >= 1200);
     handleResize();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   function handlePrev() {
     value >= 45 ? "" : setValue((prev) => prev + 45);
   }
@@ -48,7 +45,6 @@ export default function Restaurant() {
         `https://swiggy-netfily-proxy.netlify.app/.netlify/functions/swiggy?type=menu&lat=${lat}&lng=${lng}&id=${mainId}`
       );
       const result = await res.json();
-      console.log(result);
       setRestaurantInfo(result?.data?.cards[2]?.card?.card?.info);
       setDealsSlide(
         result?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers
@@ -60,6 +56,7 @@ export default function Restaurant() {
       console.log(error);
     }
   }
+
   useEffect(() => {
     fetchMenu();
   }, []);
@@ -82,6 +79,8 @@ export default function Restaurant() {
               / {restaurantInfo?.name}
             </p>
           </div>
+
+          {/* Restaurant Info Card */}
           <div className="restuarant-card-container">
             <p id="name">{restaurantInfo?.name}</p>
             <div className="restuarant-card">
@@ -113,6 +112,8 @@ export default function Restaurant() {
               </div>
             </div>
           </div>
+
+          {/* Deals Slider */}
           {show && (
             <div className="deals-slider-container">
               <div className="Dishes-Container" style={{ marginTop: "35px" }}>
@@ -144,11 +145,12 @@ export default function Restaurant() {
                       />
                     </div>
                   </div>
+
                   <div
                     className="restaurantSlide-card-container"
                     style={{ transform: `translateX(${value}%)` }}
                   >
-                    {dealsSlide.map((deal, i) => (
+                    {dealsSlide?.map((deal, i) => (
                       <div
                         key={i}
                         className="deal-card"
@@ -185,9 +187,13 @@ export default function Restaurant() {
               </div>
             </div>
           )}
+
+          {/* Menu */}
           <div className="restaurant-menu-main-container">
             <Menu menu={menu} restInfo={restaurantInfo} />
           </div>
+
+          {/* Footer */}
           <div className="restaurant-footer">
             <div className="footer-logo">
               <img
