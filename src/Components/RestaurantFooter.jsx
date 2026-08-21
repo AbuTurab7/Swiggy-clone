@@ -18,7 +18,7 @@ export default function RestaurantFooter() {
               fontWeight: "700",
             }}
           >
-            For better experience, download the Swiggy app now
+            For better experience, download the app now
           </p>
           <div className="GoogleApple-container">
             <a

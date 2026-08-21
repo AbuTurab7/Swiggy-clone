@@ -60,6 +60,7 @@ export default function Restaurant() {
   useEffect(() => {
     fetchMenu();
   }, []);
+console.log(restaurantInfo);
 
   return (
     <>

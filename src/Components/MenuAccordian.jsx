@@ -236,7 +236,7 @@ function MenuAccordian({ menuData, restInfo }) {
 
       {/* Toasts */}
       {addShow && (
-        <div className="itemAddedToast">
+        <div className="itemAddedToast" >
           <p>{cart.length} item Added</p>
           <Link to="/restaurant/cart" className="toast-cart-link">
             <span onClick={() => setAddShow(false)}>
